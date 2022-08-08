@@ -6,8 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     private Animator enemyAnim;
     private Rigidbody enemyRb;
-    public BoxCollider head;
-    public BoxCollider body;
+    public GameObject head;
+    public GameObject body;
 
     // Start is called before the first frame update
     void Start()

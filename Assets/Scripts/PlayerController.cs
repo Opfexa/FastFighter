@@ -125,7 +125,11 @@ public class PlayerController : MonoBehaviour
         {
             foot[1].GetComponent<BoxCollider>().enabled = true;
         }
-         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
+        {
+            foot[1].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick0"))
         {
             foot[1].GetComponent<BoxCollider>().enabled = true;
         }
@@ -157,6 +161,10 @@ public class PlayerController : MonoBehaviour
             foot[1].GetComponent<BoxCollider>().enabled = false;
         }
         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
+        {
+            foot[1].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick0"))
         {
             foot[1].GetComponent<BoxCollider>().enabled = false;
         }
