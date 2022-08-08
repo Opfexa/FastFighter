@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool lookRight;
     public int combo;
     public bool canAnimation;
+    [SerializeField] List<GameObject> foot;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +72,18 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Jump",true);
         }
+        if(vertical > 0)
+        {
+            playerAnimator.SetInteger("vertical",1);
+        }
+        else if(vertical < 0)
+        {
+            playerAnimator.SetInteger("vertical",-1);
+        }
+        else if(vertical == 0)
+        {
+            playerAnimator.SetInteger("vertical",0);
+        }
     }
     private void FightMode()
     {
@@ -86,6 +99,86 @@ public class PlayerController : MonoBehaviour
         {
             combo++;
             playerAnimator.SetTrigger("kick");
+        }
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            playerAnimator.SetTrigger("slowKick");
+        }
+    }
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            playerAnimator.SetBool("touchEnemy",true);
+        }   
+    }
+    private void OnCollisionExit(Collision other) 
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            playerAnimator.SetBool("touchEnemy",false);
+        }   
+    }
+    private void KickEvent()
+    {
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick"))
+        {
+            foot[1].GetComponent<BoxCollider>().enabled = true;
+        }
+         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
+        {
+            foot[1].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick2"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick3"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flip Kick"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flying Kick"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Kicking"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+    private void KickEnd()
+    {
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick"))
+        {
+            foot[1].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
+        {
+            foot[1].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick2"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick3"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flip Kick"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flying Kick"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Kicking"))
+        {
+            foot[0].GetComponent<BoxCollider>().enabled = false;
         }
     }
 }
