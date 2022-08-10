@@ -237,7 +237,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.5, z: 0.3}
+  m_Size: {x: 0.3, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &100042504
 GameObject:
@@ -796,6 +796,18 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -838,6 +850,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 067db768d0f63414fa725d15b33d5022, type: 3}
       propertyPath: m_TagString
@@ -910,6 +926,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 218069514}
   body: {fileID: 1641516893}
+  isDead: 0
+  health: 50
 --- !u!1 &1997006347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -751476226918971245, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
@@ -926,5 +944,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.5, z: 0.3}
+  m_Size: {x: 0.3, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}

@@ -5,10 +5,11 @@ using UnityEngine;
 public class HeadHitScript : MonoBehaviour
 {
     [SerializeField] GameObject body;
+    private EnemyController enemyController;
     // Start is called before the first frame update
     void Start()
     {
-
+        enemyController = GetComponentInParent<EnemyController>();
     }
 
     // Update is called once per frame
@@ -26,25 +27,15 @@ public class HeadHitScript : MonoBehaviour
         {
             if(other.tag == "PlayerFoot")
             {
-                body.SetActive(false);
+                if(!enemyController.isDead)
+                {
+                    enemyController.health = enemyController.health - 25;
+                }
                 GetComponentInParent<Animator>().SetBool("head",true);
                 Debug.Log("HeadShot");
             }
         }    
     }
-    private void OnTriggerExit(Collider other) 
-    {
-        if(gameObject.name == "Player")
-        {
-
-        }
-        else
-        {
-            if(other.tag == "PlayerFoot")
-            {
-                body.SetActive(true);
-            }
-        }
-    }
+    
     
 }

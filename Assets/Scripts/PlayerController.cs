@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
             combo++;
             playerAnimator.SetTrigger("kick");
         }
-        if(Input.GetKeyDown(KeyCode.J))
+        if(Input.GetKeyDown(KeyCode.J) && canAnimation)
         {
             playerAnimator.SetTrigger("slowKick");
         }
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         {
             foot[1].GetComponent<BoxCollider>().enabled = true;
         }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick0"))
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Mma Kick"))
         {
             foot[1].GetComponent<BoxCollider>().enabled = true;
         }
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         {
             foot[1].GetComponent<BoxCollider>().enabled = false;
         }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick0"))
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Mma Kick"))
         {
             foot[1].GetComponent<BoxCollider>().enabled = false;
         }

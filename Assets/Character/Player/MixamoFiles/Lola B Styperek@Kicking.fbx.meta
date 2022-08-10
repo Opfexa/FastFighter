@@ -67,7 +67,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.68532383
+      - time: 0.5475033
         functionName: KickEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
