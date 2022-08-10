@@ -110,14 +110,24 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             playerAnimator.SetBool("touchEnemy",true);
-        }   
+        }
+        
+    }
+    private void OnCollisionStay(Collision other) 
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            playerAnimator.SetBool("touchEnemy",true);
+        }
+        else
+        playerAnimator.SetBool("touchEnemy",false);
     }
     private void OnCollisionExit(Collision other) 
     {
         if(other.gameObject.tag == "Enemy")
         {
             playerAnimator.SetBool("touchEnemy",false);
-        }   
+        }
     }
     private void KickEvent()
     {
