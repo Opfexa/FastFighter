@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public bool lookRight;
     public int combo;
     public bool canAnimation;
+    private bool jumping;
+    private bool isOnground;
+    [SerializeField] float jumpForce;
+    [SerializeField] GameObject hips;
     [SerializeField] List<GameObject> foot;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,7 @@ public class PlayerController : MonoBehaviour
         playerRigid = GetComponent<Rigidbody>();
         fighting = false;
         lookRight = true;
+        jumping = false;
     }
 
     // Update is called once per frame
@@ -33,7 +38,10 @@ public class PlayerController : MonoBehaviour
         {
             combo = 0;
             playerAnimator.SetBool("combo",false);
+            
             canAnimation = true;
+            isOnground = true;
+            playerAnimator.applyRootMotion = true;
         }
         else if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Running"))
         {
@@ -68,9 +76,13 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Running",false);
         }
-        if(Input.GetKeyDown(KeyCode.Space) && canAnimation)
+        if(Input.GetKeyDown(KeyCode.Space) && canAnimation && isOnground)
         {
             playerAnimator.SetBool("Jump",true);
+            jumping = true;
+            isOnground =false;
+            playerAnimator.SetBool("onGround",false);
+            
         }
         if(vertical > 0)
         {
@@ -84,6 +96,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetInteger("vertical",0);
         }
+        
     }
     private void FightMode()
     {
@@ -111,7 +124,12 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("touchEnemy",true);
         }
-        
+        if(other.gameObject.tag == "Ground")
+        {
+            isOnground = true;
+            playerAnimator.SetBool("onGround",true);
+            playerAnimator.applyRootMotion = true;
+        }
     }
     private void OnCollisionStay(Collision other) 
     {
@@ -198,5 +216,10 @@ public class PlayerController : MonoBehaviour
         {
             foot[0].GetComponent<BoxCollider>().enabled = false;
         }
+    }
+    private void Jump()
+    {
+        playerAnimator.applyRootMotion = false;
+        playerRigid.AddForce(new Vector3(0,1,horizontal) * jumpForce);
     }
 }

@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 100042505}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -537,9 +537,16 @@ MonoBehaviour:
   lookRight: 0
   combo: 0
   canAnimation: 0
+  jumpForce: 200
+  hips: {fileID: 1632065939}
   foot:
   - {fileID: 43301548}
   - {fileID: 1997006347}
+--- !u!1 &1632065939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+  m_PrefabInstance: {fileID: 1782387055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1782387055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,6 +598,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7278655213584137328, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -2084811680363313996, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
       propertyPath: m_TagString
       value: PlayerFoot
@@ -603,6 +614,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
       propertyPath: m_Controller
       value: 
@@ -612,15 +627,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom
-        animation clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
