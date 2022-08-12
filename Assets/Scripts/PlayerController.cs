@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool fighting;
     public bool lookRight;
     public int combo;
+    public int pCombo;
     public bool canAnimation;
     private bool jumping;
     private bool isOnground;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
         {
             combo = 0;
             playerAnimator.SetBool("combo",false);
-            
+            playerAnimator.SetBool("pCombo",false);
             canAnimation = true;
             isOnground = true;
             playerAnimator.applyRootMotion = true;
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.L))
         {
-            combo ++;
+            pCombo ++;
             playerAnimator.SetTrigger("punch");
         }
     }
@@ -233,17 +234,14 @@ public class PlayerController : MonoBehaviour
         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightRight"))
         {
             hands[1].GetComponent<BoxCollider>().enabled = true;
-            Debug.Log("a");
         }
         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightLeft"))
         {
             hands[0].GetComponent<BoxCollider>().enabled = true;
-            Debug.Log("b");
         }
         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("UpperRight"))
         {
             hands[1].GetComponent<BoxCollider>().enabled = true;
-            Debug.Log("c");
         }
     }
     private void PunchEnd()

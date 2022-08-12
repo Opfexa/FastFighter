@@ -10,23 +10,22 @@ public class PunchBehaviour : StateMachineBehaviour
     {
         player = animator.GetComponent<PlayerController>();
         animator.ResetTrigger("punch");
-        player.combo = 0;
+        player.pCombo = 0;
         animator.SetBool("Fighting",true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(player.combo == 1)
+        if(player.pCombo == 1)
         {
-            animator.SetBool("combo",true);
+            animator.SetBool("pCombo",true);
         }
-        else if(player.combo == 0)
+        else if(player.pCombo == 0)
         {
-            animator.SetBool("combo",false);
+            animator.SetBool("pCombo",false);
         }
         player.canAnimation = false;
-        animator.ResetTrigger("kick");
         animator.ResetTrigger("slowKick");
     }
 

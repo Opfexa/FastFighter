@@ -25,12 +25,13 @@ public class HeadHitScript : MonoBehaviour
         }
         else
         {
-            if(other.tag == "PlayerFoot"|| other.tag == "PlayerHand")
+            if(other.tag == "PlayerFoot" && enemyController.canGetHit|| other.tag == "PlayerHand" && enemyController.canGetHit)
             {
                 if(!enemyController.isDead)
                 {
                     enemyController.health = enemyController.health - 25;
                 }
+                
                 GetComponentInParent<Animator>().SetBool("head",true);
                 Debug.Log("HeadShot");
             }

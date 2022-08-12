@@ -10,37 +10,27 @@ public class EnemyController : MonoBehaviour
     public GameObject body;
     public bool isDead;
     public int health;
+    public bool canGetHit;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAnim = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody>();
+        canGetHit = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         Death();
-        GetHit();
-    }
-    private void GetHit()
-    {
-         if(enemyAnim.GetBool("head") == true)
+        if(!isDead)
         {
-            head.SetActive(false);
-            body.SetActive(false);
+            canGetHit = true;
         }
-        else if(enemyAnim.GetBool("body") == true)
+        else if(isDead)
         {
-            
-            head.SetActive(false);
-            body.SetActive(false);
-        }
-        else
-        {
-            head.SetActive(true);
-            body.SetActive(true);
+            canGetHit = false;
         }
     }
     private void Death()

@@ -27,17 +27,13 @@ public class KickBehaviour : StateMachineBehaviour
         }
         player.canAnimation = false;
         animator.ResetTrigger("slowKick");
-        animator.ResetTrigger("punch");
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("kick");
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Mma Kick"))
-        {
-            animator.SetBool("combo",false);
-        }
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
