@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KickBehaviour : StateMachineBehaviour
+public class PunchBehaviour : StateMachineBehaviour
 {
     private PlayerController player;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = animator.GetComponent<PlayerController>();
-        animator.ResetTrigger("kick");
+        animator.ResetTrigger("punch");
         player.combo = 0;
         animator.SetBool("Fighting",true);
     }
@@ -26,18 +26,14 @@ public class KickBehaviour : StateMachineBehaviour
             animator.SetBool("combo",false);
         }
         player.canAnimation = false;
+        animator.ResetTrigger("kick");
         animator.ResetTrigger("slowKick");
-        animator.ResetTrigger("punch");
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("kick");
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Mma Kick"))
-        {
-            animator.SetBool("combo",false);
-        }
+        animator.ResetTrigger("punch");   
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

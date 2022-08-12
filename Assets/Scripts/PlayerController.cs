@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] GameObject hips;
     [SerializeField] List<GameObject> foot;
+    [SerializeField] List<GameObject> hands;
     // Start is called before the first frame update
     void Start()
     {
@@ -116,6 +117,11 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J) && canAnimation)
         {
             playerAnimator.SetTrigger("slowKick");
+        }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            combo ++;
+            playerAnimator.SetTrigger("punch");
         }
     }
     private void OnCollisionEnter(Collision other) 
@@ -221,5 +227,38 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator.applyRootMotion = false;
         playerRigid.AddForce(new Vector3(0,1,horizontal) * jumpForce);
+    }
+    private void PunchEvent()
+    {
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightRight"))
+        {
+            hands[1].GetComponent<BoxCollider>().enabled = true;
+            Debug.Log("a");
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightLeft"))
+        {
+            hands[0].GetComponent<BoxCollider>().enabled = true;
+            Debug.Log("b");
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("UpperRight"))
+        {
+            hands[1].GetComponent<BoxCollider>().enabled = true;
+            Debug.Log("c");
+        }
+    }
+    private void PunchEnd()
+    {
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightRight"))
+        {
+            hands[1].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightLeft"))
+        {
+            hands[0].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("UpperRight"))
+        {
+            hands[1].GetComponent<BoxCollider>().enabled = false;
+        }
     }
 }

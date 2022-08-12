@@ -542,6 +542,45 @@ MonoBehaviour:
   foot:
   - {fileID: 43301548}
   - {fileID: 1997006347}
+  hands:
+  - {fileID: 1362325504}
+  - {fileID: 1208050985}
+--- !u!1 &1208050985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2715566404302941441, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+  m_PrefabInstance: {fileID: 1782387055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1208050987
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208050985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1362325504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4728426434207774260, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+  m_PrefabInstance: {fileID: 1782387055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1362325506
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362325504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1632065939 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
@@ -602,6 +641,10 @@ PrefabInstance:
       propertyPath: m_Quality
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: -4728426434207774260, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+      propertyPath: m_TagString
+      value: PlayerHand
+      objectReference: {fileID: 0}
     - target: {fileID: -2084811680363313996, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
       propertyPath: m_TagString
       value: PlayerFoot
@@ -617,6 +660,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715566404302941441, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
+      propertyPath: m_TagString
+      value: PlayerHand
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cccb2bf87d3719b458963b6dc56c1f63, type: 3}
       propertyPath: m_Controller

@@ -25,7 +25,7 @@ public class BodyHitScript : MonoBehaviour
         }
         else
         {
-            if(other.tag == "PlayerFoot")
+            if(other.tag == "PlayerFoot" || other.tag == "PlayerHand")
             {
                 if(!enemyController.isDead)
                 {
