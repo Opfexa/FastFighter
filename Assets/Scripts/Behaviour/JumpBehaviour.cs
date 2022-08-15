@@ -20,6 +20,8 @@ public class JumpBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("Jump",false);
+        animator.SetBool("body",false);
+        animator.SetBool("head",false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

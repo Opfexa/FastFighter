@@ -31,6 +31,7 @@ public class HeadHitScript : MonoBehaviour
                     playerController.health = playerController.health - 25;
                 }
                 GetComponentInParent<Animator>().SetBool("head",true);
+                GetComponentInParent<Animator>().SetBool("Fighting",true);
             }
         }
             

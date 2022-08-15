@@ -33,6 +33,8 @@ public class PunchBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("punch");   
+        animator.SetBool("body",false);
+        animator.SetBool("head",false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
