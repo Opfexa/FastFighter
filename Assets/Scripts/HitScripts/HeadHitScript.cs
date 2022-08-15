@@ -30,7 +30,8 @@ public class HeadHitScript : MonoBehaviour
                 {
                     playerController.health = playerController.health - 25;
                 }
-                GetComponentInParent<Animator>().SetBool("head",true);
+                //GetComponentInParent<Animator>().SetBool("head",true);
+                GetComponentInParent<Animator>().Play("Hit To Head",-1,0f);
                 GetComponentInParent<Animator>().SetBool("Fighting",true);
             }
         }

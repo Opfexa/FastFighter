@@ -24,7 +24,8 @@ public class EHeadHitScript : MonoBehaviour
                 {
                     enemyController.health = enemyController.health - 10;
                 }
-                GetComponentInParent<Animator>().SetBool("head",true);
+                //GetComponentInParent<Animator>().SetBool("head",true);
+                GetComponentInParent<Animator>().Play("Hit To Body",-1,0f);
                 Debug.Log("HeadShot");
             }
           

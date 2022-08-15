@@ -25,7 +25,8 @@ public class EBodyScript : MonoBehaviour
                 {
                     enemyController.health = enemyController.health - 10;
                 }
-                GetComponentInParent<Animator>().SetBool("body",true);
+                //GetComponentInParent<Animator>().SetBool("body",true);
+                GetComponentInParent<Animator>().Play("Hit To Body",-1,0f);
                 Debug.Log("BodyShot");
             }
           

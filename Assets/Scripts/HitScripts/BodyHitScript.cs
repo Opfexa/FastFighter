@@ -31,7 +31,8 @@ public class BodyHitScript : MonoBehaviour
                 {
                     playerController.health = playerController.health - 25;
                 }
-                GetComponentInParent<Animator>().SetBool("body",true);
+                //GetComponentInParent<Animator>().SetBool("body",true);
+                GetComponentInParent<Animator>().Play("Hit To Body",-1,0f);
                 GetComponentInParent<Animator>().SetBool("Fighting",true);
             }
         }
