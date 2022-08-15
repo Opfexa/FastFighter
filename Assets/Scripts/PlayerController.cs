@@ -13,8 +13,9 @@ public class PlayerController : MonoBehaviour
     public int combo;
     public int pCombo;
     public bool canAnimation;
-    private bool jumping;
     private bool isOnground;
+    public bool isDead;
+    public int health;
     [SerializeField] float jumpForce;
     [SerializeField] GameObject hips;
     [SerializeField] List<GameObject> foot;
@@ -26,7 +27,6 @@ public class PlayerController : MonoBehaviour
         playerRigid = GetComponent<Rigidbody>();
         fighting = false;
         lookRight = true;
-        jumping = false;
     }
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         vertical = Input.GetAxis("Vertical");
         Movement();
         FightMode();
+        Death();
         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
         {
             combo = 0;
@@ -81,7 +82,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && canAnimation && isOnground)
         {
             playerAnimator.SetBool("Jump",true);
-            jumping = true;
             isOnground =false;
             playerAnimator.SetBool("onGround",false);
             
@@ -258,5 +258,15 @@ public class PlayerController : MonoBehaviour
         {
             hands[1].GetComponent<BoxCollider>().enabled = false;
         }
+    }
+    private void Death()
+    {
+        if(health == 0 || health < 0)
+        {
+            isDead = true;
+            Debug.Log("Öldün");
+        }
+        else
+        isDead = false;
     }
 }
