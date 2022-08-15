@@ -6,10 +6,13 @@ public class BodyHitScript : MonoBehaviour
 {
     [SerializeField] GameObject head;
     private EnemyController enemyController;
+    
+    private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
         enemyController = GetComponentInParent<EnemyController>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -19,22 +22,19 @@ public class BodyHitScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) 
     {
-        if(gameObject.name == "Player")
+        if(gameObject.GetComponentInParent<PlayerController>().gameObject.name == "Player")
         {
-
-        }
-        else
-        {
-            if(other.tag == "PlayerFoot" && enemyController.canGetHit || other.tag == "PlayerHand" && enemyController.canGetHit)
+            
+            if(other.tag == "EnemyFoot" || other.tag == "EnemyHand")
             {
-                if(!enemyController.isDead)
+                if(!playerController.isDead)
                 {
-                    enemyController.health = enemyController.health - 10;
+                    playerController.health = playerController.health - 25;
                 }
                 GetComponentInParent<Animator>().SetBool("body",true);
-                Debug.Log("BodyShot");
             }
-        }    
+        }
+           
     }
     
 }

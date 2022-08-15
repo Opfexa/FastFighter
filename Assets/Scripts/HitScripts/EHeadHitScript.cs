@@ -2,39 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadHitScript : MonoBehaviour
+public class EHeadHitScript : MonoBehaviour
 {
-    [SerializeField] GameObject body;
     private EnemyController enemyController;
-    private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
         enemyController = GetComponentInParent<EnemyController>();
-        playerController = GetComponentInParent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     private void OnTriggerEnter(Collider other) 
     {
-        if(gameObject.GetComponentInParent<PlayerController>().gameObject.name == "Player")
-        {
-            
-            if(other.tag == "EnemyFoot" || other.tag == "EnemyHand")
+            if(other.tag == "PlayerFoot" && enemyController.canGetHit || other.tag == "PlayerHand" && enemyController.canGetHit)
             {
-                if(!playerController.isDead)
+                if(!enemyController.isDead)
                 {
-                    playerController.health = playerController.health - 25;
+                    enemyController.health = enemyController.health - 10;
                 }
                 GetComponentInParent<Animator>().SetBool("head",true);
+                Debug.Log("HeadShot");
             }
-        }
-            
+          
     }
-    
-    
 }
