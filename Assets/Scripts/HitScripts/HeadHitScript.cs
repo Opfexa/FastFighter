@@ -33,6 +33,7 @@ public class HeadHitScript : MonoBehaviour
                 //GetComponentInParent<Animator>().SetBool("head",true);
                 GetComponentInParent<Animator>().Play("Hit To Head",-1,0f);
                 GetComponentInParent<Animator>().SetBool("Fighting",true);
+                Debug.Log("HeadDamage");
             }
         }
             

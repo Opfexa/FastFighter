@@ -34,6 +34,7 @@ public class BodyHitScript : MonoBehaviour
                 //GetComponentInParent<Animator>().SetBool("body",true);
                 GetComponentInParent<Animator>().Play("Hit To Body",-1,0f);
                 GetComponentInParent<Animator>().SetBool("Fighting",true);
+                Debug.Log("BodyDamage");
             }
         }
            

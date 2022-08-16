@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - PlayerHand
   - EnemyFoot
+  - EnemyHand
   layers:
   - Default
   - TransparentFX

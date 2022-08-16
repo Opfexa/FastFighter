@@ -264,7 +264,6 @@ public class PlayerController : MonoBehaviour
         if(health == 0 || health < 0)
         {
             isDead = true;
-            Debug.Log("Öldün");
         }
         else
         isDead = false;

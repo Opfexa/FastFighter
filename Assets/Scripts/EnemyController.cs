@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public bool canGetHit;
     public bool isMoving;
     [SerializeField] List<GameObject> enemyFoot;
+    [SerializeField] List<GameObject> enemyHand;
     public Transform player;
     public LayerMask whatIsPlayer, whatIsGround;
     //Patroling
@@ -25,8 +26,8 @@ public class EnemyController : MonoBehaviour
     public float attackCountDown;
     public bool canAttack;
     //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange , playerInAttackRange;
+    public float sightRange, attackRange, closeAttackRange;
+    public bool playerInSightRange , playerInAttackRange, playerInCloseAttackRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,11 +50,12 @@ public class EnemyController : MonoBehaviour
             canGetHit = true;
             playerInSightRange = Physics.CheckSphere(transform.position,sightRange,whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position,attackRange,whatIsPlayer);
+            playerInCloseAttackRange = Physics.CheckSphere(transform.position, closeAttackRange, whatIsPlayer);
             
             if(!playerInSightRange && !playerInAttackRange) Patroling();
             if(playerInSightRange && !playerInAttackRange) ChasePlayer();
-            if(playerInAttackRange && playerInSightRange) Attacking();
-
+            if(playerInAttackRange && playerInSightRange && !playerInCloseAttackRange) Attacking();
+            if(playerInCloseAttackRange && playerInSightRange) CloseAttack();
             if(isMoving)
             enemyAnim.SetBool("walk",true);
             else
@@ -119,6 +121,17 @@ public class EnemyController : MonoBehaviour
         canAttack = true;
         //enemyAnim.SetBool("shortAttack",false);
     }
+    private void CloseAttack()
+    {
+        isMoving = false;
+        if(canAttack ==  true)
+        {
+            enemyAnim.SetBool("shortAttack",true);
+            //enemyAnim.SetBool("shortAttack",true);
+            canAttack = false;
+            Invoke(nameof(ResetAttack), attackCountDown);
+        }
+    }
     private void KickEvent()
     {
         if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Roundhouse Kick"))
@@ -131,6 +144,28 @@ public class EnemyController : MonoBehaviour
         if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Roundhouse Kick"))
         {
             enemyFoot[1].GetComponent<BoxCollider>().enabled = false;
+        }
+    }
+    private void PunchEvent()
+    {
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("RPunching"))
+        {
+            enemyHand[1].GetComponent<BoxCollider>().enabled = true;
+        }
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("LPunching"))
+        {
+            enemyHand[0].GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+    private void PunchEnd()
+    {
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("RPunching"))
+        {
+            enemyHand[1].GetComponent<BoxCollider>().enabled = false;
+        }
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("LPunching"))
+        {
+            enemyHand[0].GetComponent<BoxCollider>().enabled = false;
         }
     }
 }
