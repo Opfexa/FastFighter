@@ -36,6 +36,7 @@ public class PunchBehaviour : StateMachineBehaviour
         animator.ResetTrigger("punch");   
         animator.SetBool("body",false);
         animator.SetBool("head",false);
+        animator.SetBool("block",false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

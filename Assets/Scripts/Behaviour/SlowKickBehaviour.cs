@@ -19,6 +19,7 @@ public class SlowKickBehaviour : StateMachineBehaviour
         animator.ResetTrigger("kick");
         animator.SetBool("body",false);
         animator.SetBool("head",false);
+        animator.SetBool("block",false);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

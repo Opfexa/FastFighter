@@ -35,6 +35,7 @@ public class KickBehaviour : StateMachineBehaviour
         animator.ResetTrigger("kick");
         animator.SetBool("body",false);
         animator.SetBool("head",false);
+        animator.SetBool("block",false);
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking")) animator.ResetTrigger("punch");
         
     }
