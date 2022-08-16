@@ -24,7 +24,7 @@ public class HeadHitScript : MonoBehaviour
         if(gameObject.GetComponentInParent<PlayerController>().gameObject.name == "Player")
         {
             
-            if(other.tag == "EnemyFoot" || other.tag == "EnemyHand")
+            if(other.tag == "EnemyFoot" && playerController.block == false || other.tag == "EnemyHand" && playerController.block == false)
             {
                 if(!playerController.isDead)
                 {
@@ -32,8 +32,11 @@ public class HeadHitScript : MonoBehaviour
                 }
                 //GetComponentInParent<Animator>().SetBool("head",true);
                 GetComponentInParent<Animator>().Play("Hit To Head",-1,0f);
-                GetComponentInParent<Animator>().SetBool("Fighting",true);
                 Debug.Log("HeadDamage");
+            }
+            if(other.tag == "EnemyFoot" && playerController.block == true || other.tag == "EnemyHand" && playerController.block == true)
+            {
+                GetComponentInParent<Animator>().SetBool("block",true);
             }
         }
             

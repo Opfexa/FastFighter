@@ -10,7 +10,6 @@ public class SlowKickBehaviour : StateMachineBehaviour
     {
        player = animator.GetComponent<PlayerController>();
        animator.ResetTrigger("slowKick");
-       animator.SetBool("Fighting", true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

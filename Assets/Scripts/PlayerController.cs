@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool fighting;
     public bool lookRight;
     public int combo;
+    public bool block;
     public int pCombo;
     public bool canAnimation;
     private bool isOnground;
@@ -102,18 +103,22 @@ public class PlayerController : MonoBehaviour
     }
     private void FightMode()
     {
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift) == true)
         {
-            fighting = !fighting;
-            if(fighting)
+            fighting = true;
+            block = true;
             playerAnimator.SetBool("Fighting",true);
-            else
+        }
+        else
+        {
             playerAnimator.SetBool("Fighting",false);
+            block = false;
         }
         if(Input.GetKeyDown(KeyCode.K))
         {
             combo++;
             playerAnimator.SetTrigger("kick");
+            playerAnimator.SetBool("Combo",true);
         }
         if(Input.GetKeyDown(KeyCode.J) && canAnimation)
         {
@@ -123,6 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             pCombo ++;
             playerAnimator.SetTrigger("punch");
+            playerAnimator.SetBool("Combo",true);
         }
     }
     private void OnCollisionEnter(Collision other) 
