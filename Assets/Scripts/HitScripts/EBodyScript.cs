@@ -28,6 +28,9 @@ public class EBodyScript : MonoBehaviour
                 //GetComponentInParent<Animator>().SetBool("body",true);
                 GetComponentInParent<Animator>().Play("Hit To Body",-1,0f);
                 Debug.Log("BodyShot");
+                
+                GetComponentInParent<Animator>().SetBool("attack",false);
+                GetComponentInParent<Animator>().SetBool("shortAttack",false);
             }
           
     }

@@ -26,6 +26,8 @@ public class EHeadHitScript : MonoBehaviour
                 }
                 //GetComponentInParent<Animator>().SetBool("head",true);
                 GetComponentInParent<Animator>().Play("Hit To Body",-1,0f);
+                GetComponentInParent<Animator>().SetBool("attack",false);
+                GetComponentInParent<Animator>().SetBool("shortAttack",false);
                 Debug.Log("HeadShot");
             }
           

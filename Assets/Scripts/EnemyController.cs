@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     public int health;
     public bool canGetHit;
     public bool isMoving;
+    [SerializeField] float damageBounce;
     [SerializeField] List<GameObject> enemyFoot;
     [SerializeField] List<GameObject> enemyHand;
     public Transform player;
@@ -71,6 +72,11 @@ public class EnemyController : MonoBehaviour
         if(health == 0 || health < 0)
         {
             isDead = true;
+            for (int i = 0; i < 2; i++)
+            {
+                enemyFoot[i].GetComponent<BoxCollider>().enabled = false;
+                enemyHand[i].GetComponent<BoxCollider>().enabled = false;
+            }
             enemyAnim.SetBool("death",true);
             GetComponent<BoxCollider>().enabled = false;
             enemyRb.useGravity = false;
@@ -101,6 +107,7 @@ public class EnemyController : MonoBehaviour
     }
     private void Attacking()
     {
+        transform.LookAt(player);
         isMoving = false;
         if(canAttack ==  true)
         {
@@ -167,5 +174,9 @@ public class EnemyController : MonoBehaviour
         {
             enemyHand[0].GetComponent<BoxCollider>().enabled = false;
         }
+    }
+    private void TakeDamage()
+    {
+        transform.Translate(new Vector3(0,0,damageBounce)*Time.deltaTime);
     }
 }

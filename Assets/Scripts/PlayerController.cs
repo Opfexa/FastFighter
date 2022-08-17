@@ -8,10 +8,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRigid;
     private float horizontal;
     private float vertical;
-    private bool fighting;
     public bool lookRight;
     public int combo;
     public bool block;
+    public bool kick;
+    public bool punch;
     public int pCombo;
     public bool canAnimation;
     private bool isOnground;
@@ -26,7 +27,6 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator = GetComponent<Animator>();
         playerRigid = GetComponent<Rigidbody>();
-        fighting = false;
         lookRight = true;
     }
 
@@ -46,14 +46,26 @@ public class PlayerController : MonoBehaviour
             canAnimation = true;
             isOnground = true;
             playerAnimator.applyRootMotion = true;
+            punch = false;
+            kick = false;
         }
         else if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Running"))
         {
             canAnimation = true;
+            playerAnimator.ResetTrigger("punch");
         }
         else if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
         {
             canAnimation = false;
+            playerAnimator.ResetTrigger("punch");
+            playerAnimator.ResetTrigger("kick");
+
+        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flying Kick") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flip Kick"))
+        {
+            canAnimation = false;
+            playerAnimator.ResetTrigger("punch");
+            playerAnimator.ResetTrigger("kick");
         }
     }
     private void Movement()
@@ -105,31 +117,33 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftShift) == true)
         {
-            fighting = true;
             block = true;
             playerAnimator.SetBool("Fighting",true);
         }
         else
         {
             playerAnimator.SetBool("Fighting",false);
-            block = false;
         }
+        
         if(Input.GetKeyDown(KeyCode.K))
         {
             combo++;
+            kick = true;
             playerAnimator.SetTrigger("kick");
-            playerAnimator.SetBool("Combo",true);
         }
+        
         if(Input.GetKeyDown(KeyCode.J) && canAnimation)
         {
             playerAnimator.SetTrigger("slowKick");
         }
+        
         if(Input.GetKeyDown(KeyCode.L))
         {
             pCombo ++;
+            punch = true;
             playerAnimator.SetTrigger("punch");
-            playerAnimator.SetBool("Combo",true);
         }
+        
     }
     private void OnCollisionEnter(Collision other) 
     {

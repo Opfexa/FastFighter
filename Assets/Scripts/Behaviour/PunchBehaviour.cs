@@ -10,8 +10,8 @@ public class PunchBehaviour : StateMachineBehaviour
     {
         player = animator.GetComponent<PlayerController>();
         animator.ResetTrigger("punch");
-        animator.SetBool("Combo",false);
         player.pCombo = 0;
+        animator.SetBool("change",false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -32,11 +32,12 @@ public class PunchBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
         animator.ResetTrigger("punch");   
         animator.SetBool("body",false);
         animator.SetBool("head",false);
         animator.SetBool("block",false);
+        if(player.kick) animator.Play("MmaKick",-1,0f);
+        player.punch = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -4,161 +4,8 @@ ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      1: 100000
-    second: BlueGuy
-  - first:
-      1: 100002
-    second: Body
-  - first:
-      1: 100004
-    second: Chest
-  - first:
-      1: 100006
-    second: Collar_L
-  - first:
-      1: 100008
-    second: Collar_R
-  - first:
-      1: 100010
-    second: Foot_L
-  - first:
-      1: 100012
-    second: Foot_R
-  - first:
-      1: 100014
-    second: ForeArm_L
-  - first:
-      1: 100016
-    second: ForeArm_R
-  - first:
-      1: 100018
-    second: Hand_L
-  - first:
-      1: 100020
-    second: Hand_R
-  - first:
-      1: 100022
-    second: Head
-  - first:
-      1: 100024
-    second: Hip
-  - first:
-      1: 100026
-    second: //RootNode
-  - first:
-      1: 100028
-    second: Neck
-  - first:
-      1: 100030
-    second: Shin_L
-  - first:
-      1: 100032
-    second: Shin_R
-  - first:
-      1: 100034
-    second: Shoulder_L
-  - first:
-      1: 100036
-    second: Shoulder_R
-  - first:
-      1: 100038
-    second: Thigh_L
-  - first:
-      1: 100040
-    second: Thigh_R
-  - first:
-      1: 100042
-    second: Toe_L
-  - first:
-      1: 100044
-    second: Toe_R
-  - first:
-      1: 100046
-    second: Root
-  - first:
-      4: 400000
-    second: BlueGuy
-  - first:
-      4: 400002
-    second: Body
-  - first:
-      4: 400004
-    second: Chest
-  - first:
-      4: 400006
-    second: Collar_L
-  - first:
-      4: 400008
-    second: Collar_R
-  - first:
-      4: 400010
-    second: Foot_L
-  - first:
-      4: 400012
-    second: Foot_R
-  - first:
-      4: 400014
-    second: ForeArm_L
-  - first:
-      4: 400016
-    second: ForeArm_R
-  - first:
-      4: 400018
-    second: Hand_L
-  - first:
-      4: 400020
-    second: Hand_R
-  - first:
-      4: 400022
-    second: Head
-  - first:
-      4: 400024
-    second: Hip
-  - first:
-      4: 400026
-    second: //RootNode
-  - first:
-      4: 400028
-    second: Neck
-  - first:
-      4: 400030
-    second: Shin_L
-  - first:
-      4: 400032
-    second: Shin_R
-  - first:
-      4: 400034
-    second: Shoulder_L
-  - first:
-      4: 400036
-    second: Shoulder_R
-  - first:
-      4: 400038
-    second: Thigh_L
-  - first:
-      4: 400040
-    second: Thigh_R
-  - first:
-      4: 400042
-    second: Toe_L
-  - first:
-      4: 400044
-    second: Toe_R
-  - first:
-      4: 400046
-    second: Root
-  - first:
-      43: 4300000
-    second: BlueGuy
-  - first:
-      74: 7400000
+      74: -4363223867245376987
     second: hp_straight_right_A
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: BlueGuy
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -210,10 +57,10 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -298,7 +145,7 @@ ModelImporter:
     importCameras: 0
     importLights: 0
     nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

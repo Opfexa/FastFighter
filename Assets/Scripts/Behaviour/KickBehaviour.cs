@@ -5,13 +5,14 @@ using UnityEngine;
 public class KickBehaviour : StateMachineBehaviour
 {
     private PlayerController player;
+    private bool punch;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = animator.GetComponent<PlayerController>();
         animator.ResetTrigger("kick");
-        animator.SetBool("Combo",false);
         player.combo = 0;
+        animator.SetBool("change",false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,6 +28,7 @@ public class KickBehaviour : StateMachineBehaviour
         }
         player.canAnimation = false;
         animator.ResetTrigger("slowKick");
+        if(player.punch == true) animator.SetBool("change",true);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -37,7 +39,7 @@ public class KickBehaviour : StateMachineBehaviour
         animator.SetBool("head",false);
         animator.SetBool("block",false);
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking")) animator.ResetTrigger("punch");
-        
+        player.kick = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
@@ -51,4 +53,5 @@ public class KickBehaviour : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+    
 }
