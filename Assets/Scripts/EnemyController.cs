@@ -7,12 +7,15 @@ public class EnemyController : MonoBehaviour
 {
     private Animator enemyAnim;
     private Rigidbody enemyRb;
+    //Body and head collider
     public GameObject head;
     public GameObject body;
+    //Death
     public bool isDead;
     public int health;
     public bool canGetHit;
     public bool isMoving;
+    //Fight
     [SerializeField] float damageBounce;
     [SerializeField] List<GameObject> enemyFoot;
     [SerializeField] List<GameObject> enemyHand;
@@ -44,19 +47,20 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         Death();
         if(!isDead)
         {
             canGetHit = true;
+
             playerInSightRange = Physics.CheckSphere(transform.position,sightRange,whatIsPlayer);
             playerInAttackRange = Physics.CheckSphere(transform.position,attackRange,whatIsPlayer);
             playerInCloseAttackRange = Physics.CheckSphere(transform.position, closeAttackRange, whatIsPlayer);
-            
+
             if(!playerInSightRange && !playerInAttackRange) Patroling();
             if(playerInSightRange && !playerInAttackRange) ChasePlayer();
             if(playerInAttackRange && playerInSightRange && !playerInCloseAttackRange) Attacking();
             if(playerInCloseAttackRange && playerInSightRange) CloseAttack();
+
             if(isMoving)
             enemyAnim.SetBool("walk",true);
             else
@@ -67,6 +71,7 @@ public class EnemyController : MonoBehaviour
             canGetHit = false;
         }
     }
+    //Check enemys health
     private void Death()
     {
         if(health == 0 || health < 0)
@@ -105,14 +110,14 @@ public class EnemyController : MonoBehaviour
         if(Physics.Raycast(walkPoint,-transform.up,2f,whatIsGround))
         walkPointSet = true;
     }
+    //Kick Attack
     private void Attacking()
     {
-        transform.LookAt(player);
+        transform.LookAt(new Vector3(transform.position.x,transform.position.y,player.transform.position.z));
         isMoving = false;
         if(canAttack ==  true)
         {
             enemyAnim.SetBool("attack",true);
-            //enemyAnim.SetBool("shortAttack",true);
             canAttack = false;
             Invoke(nameof(ResetAttack), attackCountDown);
         }
@@ -120,60 +125,53 @@ public class EnemyController : MonoBehaviour
     private void ChasePlayer()
     {
         isMoving = true;
-        transform.LookAt(player);
+        transform.LookAt(new Vector3(transform.position.x,transform.position.y,player.transform.position.z));
     }
     
     private void ResetAttack()
     {
         canAttack = true;
-        //enemyAnim.SetBool("shortAttack",false);
     }
+    //Punch Attack
     private void CloseAttack()
     {
         isMoving = false;
         if(canAttack ==  true)
         {
             enemyAnim.SetBool("shortAttack",true);
-            //enemyAnim.SetBool("shortAttack",true);
             canAttack = false;
             Invoke(nameof(ResetAttack), attackCountDown);
         }
     }
+    //Kick collider open
     private void KickEvent()
     {
-        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Roundhouse Kick"))
-        {
-            enemyFoot[1].GetComponent<BoxCollider>().enabled = true;
-        }
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("RKick"))
+        enemyFoot[1].GetComponent<BoxCollider>().enabled = true;
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("LKick"))
+        enemyFoot[0].GetComponent<BoxCollider>().enabled = true;
     }
+    //Kick collider close
     private void KickEnd()
     {
-        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Roundhouse Kick"))
-        {
-            enemyFoot[1].GetComponent<BoxCollider>().enabled = false;
-        }
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("RKick"))
+        enemyFoot[1].GetComponent<BoxCollider>().enabled = false;
     }
+    //Punch collider open
     private void PunchEvent()
     {
-        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("RPunching"))
-        {
-            enemyHand[1].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("LPunching"))
-        {
-            enemyHand[0].GetComponent<BoxCollider>().enabled = true;
-        }
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("RPunch"))
+        enemyHand[1].GetComponent<BoxCollider>().enabled = true;
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("LPunch"))
+        enemyHand[0].GetComponent<BoxCollider>().enabled = true;
     }
+    //Punch collider close
     private void PunchEnd()
     {
-        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("RPunching"))
-        {
-            enemyHand[1].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("LPunching"))
-        {
-            enemyHand[0].GetComponent<BoxCollider>().enabled = false;
-        }
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("RPunch"))
+        enemyHand[1].GetComponent<BoxCollider>().enabled = false;
+        if(enemyAnim.GetCurrentAnimatorStateInfo(0).IsTag("LPunch"))
+        enemyHand[0].GetComponent<BoxCollider>().enabled = false;
     }
     private void TakeDamage()
     {

@@ -13,6 +13,9 @@ public class KickBehaviour : StateMachineBehaviour
         animator.ResetTrigger("kick");
         player.combo = 0;
         animator.SetBool("change",false);
+        player.kick = false;
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick"))
+        animator.ResetTrigger("punch");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -39,7 +42,7 @@ public class KickBehaviour : StateMachineBehaviour
         animator.SetBool("head",false);
         animator.SetBool("block",false);
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking")) animator.ResetTrigger("punch");
-        player.kick = false;
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

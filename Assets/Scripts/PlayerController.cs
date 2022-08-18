@@ -6,20 +6,23 @@ public class PlayerController : MonoBehaviour
 {
     private Animator playerAnimator;
     private Rigidbody playerRigid;
+    //Movement
     private float horizontal;
     private float vertical;
-    public bool lookRight;
-    public int combo;
-    public bool block;
-    public bool kick;
-    public bool punch;
-    public int pCombo;
-    public bool canAnimation;
+    [SerializeField] bool lookRight;
     private bool isOnground;
-    public bool isDead;
+    public bool canAnimation;
+    //Death
+    public bool isDead { get; set; }
     public int health;
     [SerializeField] float jumpForce;
     [SerializeField] GameObject hips;
+    //Attack
+    public int combo { get; set; }
+    public bool block { get; set; }
+    public bool kick { get; set; }
+    public bool punch { get; set; }
+    public int pCombo { get; set; }
     [SerializeField] List<GameObject> foot;
     [SerializeField] List<GameObject> hands;
     // Start is called before the first frame update
@@ -33,11 +36,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Get input horizontal or vertical
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         Movement();
         FightMode();
         Death();
+        //Player idle, run, jump, kick reset animation trigger or bool
         if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
         {
             combo = 0;
@@ -68,8 +73,10 @@ public class PlayerController : MonoBehaviour
             playerAnimator.ResetTrigger("kick");
         }
     }
+    //Players Movement
     private void Movement()
     {
+        //Run and turn face
         if(horizontal > 0)
         {
             if(lookRight == false)
@@ -92,6 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Running",false);
         }
+        //Jump
         if(Input.GetKeyDown(KeyCode.Space) && canAnimation && isOnground)
         {
             playerAnimator.SetBool("Jump",true);
@@ -99,6 +107,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("onGround",false);
             
         }
+        //Getting input for kick
         if(vertical > 0)
         {
             playerAnimator.SetInteger("vertical",1);
@@ -115,6 +124,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FightMode()
     {
+        //Block
         if(Input.GetKey(KeyCode.LeftShift) == true)
         {
             block = true;
@@ -124,19 +134,19 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Fighting",false);
         }
-        
+        //Kick
         if(Input.GetKeyDown(KeyCode.K))
         {
             combo++;
             kick = true;
             playerAnimator.SetTrigger("kick");
         }
-        
+        //Kick v2
         if(Input.GetKeyDown(KeyCode.J) && canAnimation)
         {
             playerAnimator.SetTrigger("slowKick");
         }
-        
+        //Punch
         if(Input.GetKeyDown(KeyCode.L))
         {
             pCombo ++;
@@ -145,6 +155,7 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    //Detection enemy and Ground
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Enemy")
@@ -158,6 +169,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.applyRootMotion = true;
         }
     }
+    //Detection enemy touch
     private void OnCollisionStay(Collision other) 
     {
         if(other.gameObject.tag == "Enemy")
@@ -174,111 +186,46 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("touchEnemy",false);
         }
     }
+    //Kick collider open
     private void KickEvent()
     {
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick"))
-        {
-            foot[1].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
-        {
-            foot[1].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Mma Kick"))
-        {
-            foot[1].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick2"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick3"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flip Kick"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flying Kick"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Kicking"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = true;
-        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("RKick"))
+        foot[1].GetComponent<BoxCollider>().enabled = true;
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("LKick"))
+        foot[0].GetComponent<BoxCollider>().enabled = true;
     }
+    //Kick collider close
     private void KickEnd()
     {
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick"))
-        {
-            foot[1].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick1"))
-        {
-            foot[1].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Mma Kick"))
-        {
-            foot[1].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick2"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("MmaKick3"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flip Kick"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Flying Kick"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Kicking"))
-        {
-            foot[0].GetComponent<BoxCollider>().enabled = false;
-        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("RKick"))
+        foot[1].GetComponent<BoxCollider>().enabled = false;
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("LKick"))
+        foot[0].GetComponent<BoxCollider>().enabled = false;
     }
+    //Jump
     private void Jump()
     {
         playerAnimator.applyRootMotion = false;
         playerRigid.AddForce(new Vector3(0,1,horizontal) * jumpForce);
     }
+    //Punch collider open
     private void PunchEvent()
     {
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightRight"))
-        {
-            hands[1].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightLeft"))
-        {
-            hands[0].GetComponent<BoxCollider>().enabled = true;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("UpperRight"))
-        {
-            hands[1].GetComponent<BoxCollider>().enabled = true;
-        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("RPunch"))
+        hands[1].GetComponent<BoxCollider>().enabled = true;
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("LPunch"))
+        hands[0].GetComponent<BoxCollider>().enabled = true;
+
     }
+    //Punch collider close
     private void PunchEnd()
     {
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightRight"))
-        {
-            hands[1].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("StraightLeft"))
-        {
-            hands[0].GetComponent<BoxCollider>().enabled = false;
-        }
-        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("UpperRight"))
-        {
-            hands[1].GetComponent<BoxCollider>().enabled = false;
-        }
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("RPunch"))
+        hands[1].GetComponent<BoxCollider>().enabled = false;
+        if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("LPunch"))
+        hands[0].GetComponent<BoxCollider>().enabled = false;
     }
+    //Check death
     private void Death()
     {
         if(health == 0 || health < 0)

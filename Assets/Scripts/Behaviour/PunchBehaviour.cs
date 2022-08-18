@@ -12,6 +12,9 @@ public class PunchBehaviour : StateMachineBehaviour
         animator.ResetTrigger("punch");
         player.pCombo = 0;
         animator.SetBool("change",false);
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("StraightRight"))
+        animator.ResetTrigger("kick");
+        player.punch = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -37,7 +40,7 @@ public class PunchBehaviour : StateMachineBehaviour
         animator.SetBool("head",false);
         animator.SetBool("block",false);
         if(player.kick) animator.Play("MmaKick",-1,0f);
-        player.punch = false;
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
