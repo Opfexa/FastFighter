@@ -13,5 +13,5 @@
  
  Enemy AI: https://www.youtube.com/watch?v=UjkSFoLxesw
  
- Model and animations: mixamo.com, https://assetstore.unity.com/packages/3d/animations/fighting-motions-vol-1-76699
+ Model and animations: https://www.mixamo.com , https://assetstore.unity.com/packages/3d/animations/fighting-motions-vol-1-76699
  
